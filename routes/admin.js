@@ -101,66 +101,68 @@ adminRouter.post("/signin" , async function(req,res){
 
   
 
-// adminRouter.post("/courseCreate" , adminMiddleware ,async function(req,res){
+adminRouter.post("/courseCreate" , adminMiddleware ,async function(req,res){
 
-//     const adminId = req.userId;
+    const adminId = req.userId;
 
-//     const { title , description ,price , imageUrl } = req.body ;
+    const { title , description ,price , imageUrl } = req.body ;
 
-//     const course = await courseModel.create({
-//         title,
-//         description,
-//         price,
-//         imageUrl,
-//         creatorId : adminId
-//     })
-
-
-//     // console.log(`person who creates the course ${course.creatorId}`)
-
-//     res.json({
-//         msg : "course created",
-//         createdCourseId : course._id
-//         // courseCreatotrId : adminId
-//     })
-// })
+    const course = await courseModel.create({
+        title,
+        description,
+        price,
+        imageUrl,
+        creatorId : adminId
+    })
 
 
+    // console.log(`person who creates the course ${course.creatorId}`)
 
-// adminRouter.put("/course" , adminMiddleware ,async function(req,res){
+    res.json({
+        msg : "course created",
+        createdCourseId : course._id
+        // courseCreatotrId : adminId
+    })
+})
+
+
+
+adminRouter.put("/course" , adminMiddleware ,async function(req,res){
 
     
 
-//     const adminId = req.userId ;
+    const adminId = req.userId ;
 
-//     const { title ,description ,imageUrl, price , courseId} = req.body 
+    const { title ,description ,imageUrl, price , courseId} = req.body 
 
-//     // console.log(req.body) ; 
-
-
-
-//     const course = await courseModel.updateOne({
-//         _id : courseId , // 
-//         creatorId : adminId // its a check where creator didn't change another creator course object
-//     },{
-//         title,
-//         description,
-//         price,
-//         imageUrl
-//     })
-
-//     // console.log(randomId)
-
-//     // console.log(course)
-
-//     console.log({ courseId , adminId });
+    // console.log(req.body) ; 
 
 
-//     res.json({
-//         msg : " course updated hjh",
-//         updateCourseId : course._id 
-//     })
-// })
+
+    const course = await courseModel.updateOne({
+        _id : courseId , // 
+        creatorId : adminId // its a check where creator didn't change another creator course object
+    },{
+        title,
+        description,
+        price,
+        imageUrl
+    })
+
+    // console.log(randomId)
+
+    // console.log(course)
+
+    console.log({ courseId , adminId });
+
+
+    res.json({
+        msg : " course updated hjh",
+        updateCourseId : course._id 
+    })
+})
+
+
 
 
 // adminRouter.post("/course", adminMiddleware, async function(req, res) {
@@ -179,20 +181,26 @@ adminRouter.post("/signin" , async function(req,res){
 
 //     res.json({
 //         message: "Course created",
-//         courseId: course._id
+//         courseCreatedId: course._id
 //     })
 // })
-
-
 
 // adminRouter.put("/course", adminMiddleware, async function(req, res) {
 //     const adminId = req.userId;
 
-//     const { title, description, imageUrl, price, courseId } = req.body;
+//     const { title, description, imageUrl, price, courseCreatedId } = req.body;
 
-//     // creating a web3 saas in 6 hours
+//     const courseId = await courseModel.findById(courseCreatedId);
+//     if(!courseId){
+//         res.status(403).json({
+//             msg : "course is not found "
+//         })
+//         return
+//     }
+//     console.log(courseId)
+
 //     const course = await courseModel.updateOne({
-//         _id: courseId, 
+//         _id: courseCreatedId, 
 //         creatorId: adminId 
 //     }, {
 //         title: title, 
@@ -201,66 +209,15 @@ adminRouter.post("/signin" , async function(req,res){
 //         price: price
 //     })
 
+//     // console.log("course id " + title)
+
+//     // console.log(" the course id is " ) 
+
 //     res.json({
 //         message: "Course updated",
-//         courseId: course._id
+//         courseUpdateId: course._id
 //     })
 // })
-
-
-adminRouter.post("/course", adminMiddleware, async function(req, res) {
-    const adminId = req.userId;
-
-    const { title, description, imageUrl, price } = req.body;
-
-    // creating a web3 saas in 6 hours
-    const course = await courseModel.create({
-        title: title, 
-        description: description, 
-        imageUrl: imageUrl, 
-        price: price, 
-        creatorId: adminId
-    })
-
-    res.json({
-        message: "Course created",
-        courseCreatedId: course._id
-    })
-})
-
-adminRouter.put("/course", adminMiddleware, async function(req, res) {
-    const adminId = req.userId;
-
-    const { title, description, imageUrl, price, courseCreatedId } = req.body;
-
-    const courseId = await courseModel.findById(courseCreatedId);
-    if(!courseId){
-        res.status(403).json({
-            msg : "course is not found "
-        })
-        return
-    }
-    console.log(courseId)
-
-    const course = await courseModel.updateOne({
-        _id: courseCreatedId, 
-        creatorId: adminId 
-    }, {
-        title: title, 
-        description: description, 
-        imageUrl: imageUrl, 
-        price: price
-    })
-
-    // console.log("course id " + title)
-
-    // console.log(" the course id is " ) 
-
-    res.json({
-        message: "Course updated",
-        courseUpdateId: course._id
-    })
-})
 
 
 
