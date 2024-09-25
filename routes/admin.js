@@ -98,8 +98,15 @@ adminRouter.post("/signin" , async function(req,res){
 
 
 
+// bhaiyya i have some doubts in the post middleware that i sent in this i sent in the response object i sent the courseCreatorid : course_id ;
 
-  
+
+//  in the put method when in the body i sent  const { title ,description ,imageUrl, price , courseId} = req.body this the course is not update 
+// my question is this due to i sent the response i sent the key courseCreatorid : course._id the key gets change ? if key gets change i had to use 
+// sent this body  { title ,description ,imageUrl, price , courseCreatorid} = req.body  INSTEAD of const { title ,description ,imageUrl, price , courseId} = req.body
+//  and my second doubt is this in the put endpoint the updateOne returns the object and i store the value of the object in the course variable when 
+// i log the value console.log(course_.id) it gives me undefined 
+// but when i logged console.log(courseCreatorId) it gives me key how ?? i dont understand this thing
 
 adminRouter.post("/courseCreate" , adminMiddleware ,async function(req,res){
 
